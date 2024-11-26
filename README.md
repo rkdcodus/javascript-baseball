@@ -2,6 +2,9 @@
 
 1. 최소한의 (알고리즘)복잡도를 코드로 구현  
    = 모든 숫자를 문자열로 입력받는다.
+   - 배열로 입력 받을 경우, 메모리 낭비가 있고
+   - 숫자로 입력 받을 경우, 비교 연산이 상대적으로 구현하기 복잡하다.
+   
 2. 과제 예시와 똑같이 구현한다. (개선점은 구현하지 않고 주석으로 남긴다.)
 3. GitHub : https://github.com/weggle-plus/javascript-baseball  
    요청사항 : repository를 fork하고 원본repository에 PR을 열어주세요  
