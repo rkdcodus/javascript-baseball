@@ -47,6 +47,17 @@ function compareNumber() {
 
   if (set.size == 3) {
     // 컴퓨터 랜덤 숫자와 비교하기
+    // for(i = 0; i < 3; i++) {
+    //   let a = 0;
+    //   if (threeNumbers[i] == correctAnswer[a]) {
+    //     strike += 1;
+    //   } else {
+    //     if (threeNumbers[a] == correctAnswer[a]) {
+    //       ball += 1;
+    //       a += 1;
+    //     }
+    //   }
+    // } 
     [...threeNumbers].forEach((num, index) => {
       if (correctAnswer[index] == num) {
         strike += 1;
@@ -54,8 +65,9 @@ function compareNumber() {
         ball += 1;
       }
     });
-
-    output.insertAdjacentHTML("beforeend", `${threeNumbers}<br>`);
+    
+    output.insertAdjacentHTML(
+      "beforeend", `${strike}스트라이크, ${ball}볼 ${threeNumbers}<br>`);
     output.insertAdjacentHTML("beforeend", "숫자를 입력해주세요.<br>");
   } else {
     output.insertAdjacentHTML("beforeend", "중복없이 3자릿수를 입력해주세요.<br>");
