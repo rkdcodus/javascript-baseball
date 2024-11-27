@@ -57,7 +57,7 @@ function compareNumber() {
     //       a += 1;
     //     }
     //   }
-    // } 
+    // }
     [...threeNumbers].forEach((num, index) => {
       if (correctAnswer[index] == num) {
         strike += 1;
@@ -65,10 +65,24 @@ function compareNumber() {
         ball += 1;
       }
     });
-    
-    output.insertAdjacentHTML(
-      "beforeend", `${strike}스트라이크, ${ball}볼 ${threeNumbers}<br>`);
-    output.insertAdjacentHTML("beforeend", "숫자를 입력해주세요.<br>");
+    output.insertAdjacentHTML("beforeend", `${threeNumbers}<br>`);
+
+    let str = "";
+
+    if (ball) {
+      str += `${ball}볼`;
+    }
+
+    if (strike) {
+      str += `${strike}스트라이크`;
+    }
+
+    if (str === "") {
+      str = "낫싱";
+    }
+
+    output.insertAdjacentHTML("beforeend", `${str}<br>`);
+    // output.insertAdjacentHTML("beforeend", "숫자를 입력해주세요.<br>");
   } else {
     output.insertAdjacentHTML("beforeend", "중복없이 3자릿수를 입력해주세요.<br>");
   }
