@@ -42,13 +42,22 @@ function pickRandomNumber() {
 function compareNumber() {
   let threeNumbers = input.value;
   const set = new Set(threeNumbers);
+  let ball = 0;
+  let strike = 0;
 
   if (set.size == 3) {
-    // 컴퓨터 3자릿수와 비교하고 힌트를 출력
+    // 컴퓨터 랜덤 숫자와 비교하기
+    [...threeNumbers].forEach((num, index) => {
+      if (correctAnswer[index] == num) {
+        strike += 1;
+      } else if (correctAnswer.includes(num)) {
+        ball += 1;
+      }
+    });
+
     output.insertAdjacentHTML("beforeend", `${threeNumbers}<br>`);
     output.insertAdjacentHTML("beforeend", "숫자를 입력해주세요.<br>");
   } else {
     output.insertAdjacentHTML("beforeend", "중복없이 3자릿수를 입력해주세요.<br>");
   }
-  console.log(set);
 }
