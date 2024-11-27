@@ -8,8 +8,7 @@ button.addEventListener("click", () => {
   if (input.value == 1) {
     //컴퓨터 숫자 랜덤 생성&출력
     correctAnswer = pickRandomNumber();
-
-    output.insertAdjacentHTML("beforeend", "컴퓨터가 숫자를 뽑았습니다.<br>");
+    output.innerHTML = "컴퓨터가 숫자를 뽑았습니다.<br>";
   } else if (input.value == 9) {
     output.innerHTML = "";
     correctAnswer = 0;
@@ -82,6 +81,13 @@ function compareNumber() {
     }
 
     output.insertAdjacentHTML("beforeend", `${str}<br>`);
+
+    if (str === "3스트라이크") {
+      output.insertAdjacentHTML(
+        "beforeend",
+        `3개의 숫자를 모두 맞히셨습니다.<br>--------게임 종료---------`
+      );
+    }
     // output.insertAdjacentHTML("beforeend", "숫자를 입력해주세요.<br>");
   } else {
     output.insertAdjacentHTML("beforeend", "중복없이 3자릿수를 입력해주세요.<br>");
