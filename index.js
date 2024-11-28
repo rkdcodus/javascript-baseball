@@ -5,18 +5,18 @@ const output = document.querySelector(".output");
 let correctAnswer = 0;
 
 button.addEventListener("click", () => {
-  if (input.value == 1) {
+  if (input.value === "1") {
     //컴퓨터 숫자 랜덤 생성&출력
     correctAnswer = pickRandomNumber();
     output.innerHTML = "컴퓨터가 숫자를 뽑았습니다.<br>";
     output.insertAdjacentHTML("beforeend", "숫자를 입력해주세요 : ");
-  } else if (input.value == 9) {
+  } else if (input.value === "9") {
     output.innerHTML = "";
     correctAnswer = 0;
     alert("애플리케이션이 종료되었습니다.");
   }
 
-  if (correctAnswer && input.value != 1) {
+  if (correctAnswer && input.value !== "1") {
     compareNumber();
   }
 
@@ -38,7 +38,6 @@ function pickRandomNumber() {
   return numbers;
 }
 
-//
 function printHint(ball, strike) {
   let str = "";
 
@@ -51,11 +50,10 @@ function printHint(ball, strike) {
   if (str === "3스트라이크") {
     output.insertAdjacentHTML(
       "beforeend",
-      `<br>3개의 숫자를 모두 맞히셨습니다.<br>
-      --------게임 종료---------`
+      "<br>3개의 숫자를 모두 맞히셨습니다.<br>--------게임 종료---------"
     );
   } else {
-    output.insertAdjacentHTML("beforeend", `<br>숫자를 입력해주세요 : `);
+    output.insertAdjacentHTML("beforeend", "<br>숫자를 입력해주세요 : ");
   }
 }
 
@@ -70,8 +68,8 @@ function compareNumber() {
 
   if (set.size === 3) {
     for (let i = 0; i < 3; i++) {
-      if (threeNumbers[i] === correctAnswer[i]) strike++;
-      else if (correctAnswer.includes(threeNumbers[i])) ball++;
+      if (threeNumbers[i] === correctAnswer[i]) strike += 1;
+      else if (correctAnswer.includes(threeNumbers[i])) ball += 1;
     }
 
     // 방법1
@@ -97,7 +95,7 @@ function compareNumber() {
 /**
  * 
 1. 숫자를 입력해주세요 : 를 적합하게 추가한다. O
-2. ==과 ===의 적합한 사용
+2. ==과 ===의 적합한 사용 o
 3. 예외 처리 상태 코드 추가(400, 404, 201등) + 추가 안해야 하나?
 -> 상태 코드보다는 메세지로 예외 처리
 4. 코드 가독성 정리, 주석 처리
