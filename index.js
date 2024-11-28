@@ -9,11 +9,11 @@ button.addEventListener("click", () => {
     //컴퓨터 숫자 랜덤 생성&출력
     correctAnswer = pickRandomNumber();
     output.innerHTML = "컴퓨터가 숫자를 뽑았습니다.<br>";
-    output.insertAdjacentHTML("beforeend", "숫자를 입력해주세요 : ");
+    print("숫자를 입력해주세요 : ");
   } else if (input.value === "9") {
     output.innerHTML = "";
     correctAnswer = 0;
-    alert("애플리케이션이 종료되었습니다.");
+    print("애플리케이션이 종료되었습니다.");
   }
 
   if (correctAnswer && input.value !== "1") {
@@ -38,6 +38,10 @@ function pickRandomNumber() {
   return numbers;
 }
 
+function print (str) {
+  output.insertAdjacentHTML("beforeend", str);
+}
+
 function printHint(ball, strike) {
   let str = "";
 
@@ -45,15 +49,12 @@ function printHint(ball, strike) {
   if (strike) str += `${strike}스트라이크`;
   if (str === "") str = "낫싱";
 
-  output.insertAdjacentText("beforeend", `${str}`);
+  print(str);
 
   if (str === "3스트라이크") {
-    output.insertAdjacentHTML(
-      "beforeend",
-      "<br>3개의 숫자를 모두 맞히셨습니다.<br>--------게임 종료---------"
-    );
+    print("<br>3개의 숫자를 모두 맞히셨습니다.<br>--------게임 종료---------");
   } else {
-    output.insertAdjacentHTML("beforeend", "<br>숫자를 입력해주세요 : ");
+    print("<br>숫자를 입력해주세요 : ")
   }
 }
 
@@ -81,14 +82,14 @@ function compareNumber() {
     //   }
     // });
 
-    output.insertAdjacentHTML("beforeend", `${threeNumbers}<br>`);
+    print(`${threeNumbers}<br>`);
 
     printHint(ball, strike);
   } else {
     if (output.innerHTML.endsWith("숫자를 입력해주세요 : ")) {
       output.innerHTML = output.innerHTML.slice(0, -13);
     }
-    output.insertAdjacentHTML("beforeend", "중복없이 3자릿수를 입력해주세요.<br>");
+    print("중복없이 3자릿수를 입력해주세요.<br>");
   }
 }
 
