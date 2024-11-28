@@ -1,8 +1,9 @@
+body {
+  display: flex;
+  justify-content: center;
+}
 section {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin-top: 50px;
   text-align: center;
 }
 
