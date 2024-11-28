@@ -68,13 +68,10 @@ function compareNumber() {
 
   console.log(correctAnswer);
 
-  if (set.size == 3) {
+  if (set.size === 3) {
     for (let i = 0; i < 3; i++) {
-      if (threeNumbers[i] === correctAnswer[i]) {
-        strike++;
-      } else if (correctAnswer.includes(threeNumbers[i])) {
-        ball++;
-      }
+      if (threeNumbers[i] === correctAnswer[i]) strike++;
+      else if (correctAnswer.includes(threeNumbers[i])) ball++;
     }
 
     // 방법1
