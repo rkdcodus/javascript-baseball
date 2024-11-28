@@ -4,6 +4,7 @@ const output = document.querySelector(".output");
 
 const start = "1";
 const end = "9";
+const regex = /^[1-9]{3}$/;
 
 let correctAnswer = 0;
 
@@ -17,6 +18,11 @@ let correctAnswer = 0;
 5. 중복되는 코드 병합, 반복문 최소화
 6. 반복되는 코드는 함수화 o
 7. 문자열 따옴표, 백틱 통일 o 
+
+예외처리
+1. 숫자 이외의 문자를 3자리 입력 시 정상 작동되고 있음.
+2. 엔터 쳤을 때 새로고침됨.
+
 
 질문
 1. 함수 정의 방식 ( 화살표 함수 vs 함수 선언문)
@@ -63,10 +69,12 @@ const compareNumber = () => {
   let ball = 0;
   let strike = 0;
 
+  print(`${threeNumbers}<br>`);
+
   console.log(correctAnswer);
 
-  if (set.size === 3 && threeNumbers.length === 3) {
-    console.log(set)
+  if (regex.test(threeNumbers) && set.size === 3) {
+    console.log(set);
     for (let i = 0; i < 3; i++) {
       if (threeNumbers[i] === correctAnswer[i]) strike += 1;
       else if (correctAnswer.includes(threeNumbers[i])) ball += 1;
@@ -81,14 +89,14 @@ const compareNumber = () => {
     //   }
     // });
 
-    print(`${threeNumbers}<br>`);
+    //print(`${threeNumbers}<br>`);
 
     printHint(ball, strike);
   } else {
-    if (output.innerHTML.endsWith("숫자를 입력해주세요 : ")) {
-      output.innerHTML = output.innerHTML.slice(0, -13);
-    }
-    print("중복없이 3자릿수를 입력해주세요.<br>");
+    // if (output.innerHTML.endsWith("숫자를 입력해주세요 : ")) {
+    //   output.innerHTML = output.innerHTML.slice(0, -13);
+    // }
+    print("중복없이 3자릿수를 입력해주세요.<br> 숫자를 입력해주세요 : ");
   }
 };
 
@@ -102,7 +110,7 @@ button.addEventListener("click", () => {
     correctAnswer = 0;
     print("애플리케이션이 종료되었습니다.");
   } else if (!correctAnswer) {
-    print("1 혹은 9를 입력해주세요<br>")
+    print("1 혹은 9를 입력해주세요<br>");
   }
 
   if (correctAnswer && input.value !== start) {
