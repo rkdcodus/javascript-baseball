@@ -38,23 +38,46 @@ function pickRandomNumber() {
   return numbers;
 }
 
+//
+function printHint(ball, strike) {
+  let str = "";
+
+  if (ball) str += `${ball}볼`;
+  if (strike) str += `${strike}스트라이크`;
+  if (str === "") str = "낫싱";
+
+  output.insertAdjacentText("beforeend", `${str}`);
+
+  if (str === "3스트라이크") {
+    output.insertAdjacentHTML(
+      "beforeend",
+      `<br>3개의 숫자를 모두 맞히셨습니다.<br>
+      --------게임 종료---------`
+    );
+  } else {
+    output.insertAdjacentHTML("beforeend", `<br>숫자를 입력해주세요 : `);
+  }
+}
+
 // 숫자 비교 함수
 function compareNumber() {
-  let threeNumbers = input.value;
+  const threeNumbers = input.value;
   const set = new Set(threeNumbers);
   let ball = 0;
   let strike = 0;
 
-  if (set.size == 3) {
+  console.log(correctAnswer);
 
+  if (set.size == 3) {
     for (let i = 0; i < 3; i++) {
       if (threeNumbers[i] === correctAnswer[i]) {
-        strike++
+        strike++;
       } else if (correctAnswer.includes(threeNumbers[i])) {
-        ball++
+        ball++;
       }
-    };
+    }
 
+    // 방법1
     // [...threeNumbers].forEach((num, index) => {
     //   if (correctAnswer[index] == num) {
     //     strike += 1;
@@ -65,32 +88,10 @@ function compareNumber() {
 
     output.insertAdjacentHTML("beforeend", `${threeNumbers}<br>`);
 
-    let str = "";
-
-    if (ball) {
-      str += `${ball}볼`;
-    }
-
-    if (strike) {
-      str += `${strike}스트라이크`;
-    }
-
-    if (str === "") {
-      str = "낫싱";
-    }
-
-    output.insertAdjacentHTML("beforeend", `${str}<br>숫자를 입력해주세요 : `);
-
-    if (str === "3스트라이크") {
-      output.insertAdjacentHTML(
-        "beforeend",
-        `3개의 숫자를 모두 맞히셨습니다.<br>--------게임 종료---------`
-      );
-    }
-
+    printHint(ball, strike);
   } else {
     if (output.innerHTML.endsWith("숫자를 입력해주세요 : ")) {
-      output.innerHTML = output.innerHTML.slice(0, -13)
+      output.innerHTML = output.innerHTML.slice(0, -13);
     }
     output.insertAdjacentHTML("beforeend", "중복없이 3자릿수를 입력해주세요.<br>");
   }
@@ -105,5 +106,5 @@ function compareNumber() {
 4. 코드 가독성 정리, 주석 처리
 5. 중복되는 코드 병합, 반복문 최소화
 6. 반복되는 코드는 함수화
-
+7. 문자열 따옴표, 백틱 통일
  */
