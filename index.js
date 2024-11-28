@@ -65,7 +65,8 @@ const compareNumber = () => {
 
   console.log(correctAnswer);
 
-  if (set.size === 3) {
+  if (set.size === 3 && threeNumbers.length === 3) {
+    console.log(set)
     for (let i = 0; i < 3; i++) {
       if (threeNumbers[i] === correctAnswer[i]) strike += 1;
       else if (correctAnswer.includes(threeNumbers[i])) ball += 1;
@@ -100,6 +101,8 @@ button.addEventListener("click", () => {
     output.innerHTML = "";
     correctAnswer = 0;
     print("애플리케이션이 종료되었습니다.");
+  } else if (!correctAnswer) {
+    print("1 혹은 9를 입력해주세요<br>")
   }
 
   if (correctAnswer && input.value !== start) {
