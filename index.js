@@ -9,6 +9,7 @@ button.addEventListener("click", () => {
     //컴퓨터 숫자 랜덤 생성&출력
     correctAnswer = pickRandomNumber();
     output.innerHTML = "컴퓨터가 숫자를 뽑았습니다.<br>";
+    output.insertAdjacentHTML("beforeend", "숫자를 입력해주세요 : ");
   } else if (input.value == 9) {
     output.innerHTML = "";
     correctAnswer = 0;
@@ -45,25 +46,23 @@ function compareNumber() {
   let strike = 0;
 
   if (set.size == 3) {
-    // 컴퓨터 랜덤 숫자와 비교하기
-    // for(i = 0; i < 3; i++) {
-    //   let a = 0;
-    //   if (threeNumbers[i] == correctAnswer[a]) {
-    //     strike += 1;
-    //   } else {
-    //     if (threeNumbers[a] == correctAnswer[a]) {
-    //       ball += 1;
-    //       a += 1;
-    //     }
-    //   }
-    // }
-    [...threeNumbers].forEach((num, index) => {
-      if (correctAnswer[index] == num) {
-        strike += 1;
-      } else if (correctAnswer.includes(num)) {
-        ball += 1;
+
+    for (let i = 0; i < 3; i++) {
+      if (threeNumbers[i] === correctAnswer[i]) {
+        strike++
+      } else if (correctAnswer.includes(threeNumbers[i])) {
+        ball++
       }
-    });
+    };
+
+    // [...threeNumbers].forEach((num, index) => {
+    //   if (correctAnswer[index] == num) {
+    //     strike += 1;
+    //   } else if (correctAnswer.includes(num)) {
+    //     ball += 1;
+    //   }
+    // });
+
     output.insertAdjacentHTML("beforeend", `${threeNumbers}<br>`);
 
     let str = "";
@@ -80,7 +79,7 @@ function compareNumber() {
       str = "낫싱";
     }
 
-    output.insertAdjacentHTML("beforeend", `${str}<br>`);
+    output.insertAdjacentHTML("beforeend", `${str}<br>숫자를 입력해주세요 : `);
 
     if (str === "3스트라이크") {
       output.insertAdjacentHTML(
@@ -88,8 +87,23 @@ function compareNumber() {
         `3개의 숫자를 모두 맞히셨습니다.<br>--------게임 종료---------`
       );
     }
-    // output.insertAdjacentHTML("beforeend", "숫자를 입력해주세요.<br>");
+
   } else {
+    if (output.innerHTML.endsWith("숫자를 입력해주세요 : ")) {
+      output.innerHTML = output.innerHTML.slice(0, -13)
+    }
     output.insertAdjacentHTML("beforeend", "중복없이 3자릿수를 입력해주세요.<br>");
   }
 }
+
+/**
+ * 
+1. 숫자를 입력해주세요 : 를 적합하게 추가한다. O
+2. ==과 ===의 적합한 사용
+3. 예외 처리 상태 코드 추가(400, 404, 201등) + 추가 안해야 하나?
+-> 상태 코드보다는 메세지로 예외 처리
+4. 코드 가독성 정리, 주석 처리
+5. 중복되는 코드 병합, 반복문 최소화
+6. 반복되는 코드는 함수화
+
+ */
