@@ -10,10 +10,13 @@ const NUMBER_MIN = 1;
 const NUMBER_MAX = 9;
 
 let correctAnswer = "";
+let gameStatus = false;
 
 const print = (str) => {
   output.insertAdjacentHTML("beforeend", str);
 };
+
+const inputReset = () => (input.value = "");
 
 const pickRandomNumber = () => {
   let numbers = "";
@@ -37,6 +40,7 @@ const printHint = (ball, strike) => {
   print(str);
 
   if (strike === NUMBER_LENGTH) {
+    gameStatus = false;
     return print("<br>3개의 숫자를 모두 맞히셨습니다.<br>--------게임 종료---------");
   }
 
@@ -50,6 +54,7 @@ const compareNumber = () => {
   let strike = 0;
 
   print(`${inputNumbers}<br>`);
+  inputReset();
 
   if (NUMBER_INPUT_REGEX.test(inputNumbers) && set.size === NUMBER_LENGTH) {
     for (let i = 0; i < NUMBER_LENGTH; i++) {
@@ -74,27 +79,37 @@ const compareNumber = () => {
   print("중복없이 3자릿수를 입력해주세요.<br> 숫자를 입력해주세요 : ");
 };
 
+const startGame = () => {
+  gameStatus = true;
+  correctAnswer = pickRandomNumber();
+  output.innerHTML = "컴퓨터가 숫자를 뽑았습니다.<br>";
+  console.log(correctAnswer);
+  print("숫자를 입력해주세요 : ");
+  inputReset();
+};
+
+const endGame = () => {
+  gameStatus = false;
+  correctAnswer = "";
+  output.innerHTML = "";
+  print("애플리케이션이 종료되었습니다.");
+  inputReset();
+};
+
+const isNotPlaying = () => {
+  output.innerHTML = "";
+  print("1 혹은 9를 입력해주세요<br>");
+  inputReset();
+};
+
 const gameHandler = (event) => {
   event.preventDefault();
 
-  if (input.value === GAME_START) {
-    correctAnswer = pickRandomNumber();
-    output.innerHTML = "컴퓨터가 숫자를 뽑았습니다.<br>";
-    console.log(correctAnswer);
-    print("숫자를 입력해주세요 : ");
-  } else if (input.value === GAME_END) {
-    output.innerHTML = "";
-    correctAnswer = 0;
-    print("애플리케이션이 종료되었습니다.");
-  } else if (!correctAnswer) {
-    print("1 혹은 9를 입력해주세요<br>");
-  }
+  if (input.value === GAME_START) return startGame();
+  else if (input.value === GAME_END) return endGame();
 
-  if (correctAnswer && input.value !== GAME_START) {
-    compareNumber();
-  }
-
-  input.value = "";
+  if (gameStatus) return compareNumber();
+  isNotPlaying();
 };
 
 form.addEventListener("submit", gameHandler);
