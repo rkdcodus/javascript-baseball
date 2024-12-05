@@ -9,7 +9,6 @@ const NUMBER_LENGTH = 3;
 const NUMBER_MIN = 1;
 const NUMBER_MAX = 9;
 
-
 let correctAnswer = 0;
 
 const print = (str) => {
@@ -45,17 +44,17 @@ const printHint = (ball, strike) => {
 };
 
 const compareNumber = () => {
-  const threeNumbers = input.value;
-  const set = new Set(threeNumbers);
+  const inputNumbers = input.value;
+  const set = new Set(inputNumbers);
   let ball = 0;
   let strike = 0;
 
-  print(`${threeNumbers}<br>`);
+  print(`${inputNumbers}<br>`);
 
-  if (NUMBER_INPUT_REGEX.test(threeNumbers) && set.size === NUMBER_LENGTH) {
+  if (NUMBER_INPUT_REGEX.test(inputNumbers) && set.size === NUMBER_LENGTH) {
     for (let i = 0; i < NUMBER_LENGTH; i++) {
-      if (threeNumbers[i] === correctAnswer[i]) strike += 1;
-      else if (correctAnswer.includes(threeNumbers[i])) ball += 1;
+      if (inputNumbers[i] === correctAnswer[i]) strike += 1;
+      else if (correctAnswer.includes(inputNumbers[i])) ball += 1;
     }
 
     /**
@@ -81,7 +80,7 @@ const gameHandler = (event) => {
   if (input.value === GAME_START) {
     correctAnswer = pickRandomNumber();
     output.innerHTML = "컴퓨터가 숫자를 뽑았습니다.<br>";
-    console.log(correctAnswer)
+    console.log(correctAnswer);
     print("숫자를 입력해주세요 : ");
   } else if (input.value === GAME_END) {
     output.innerHTML = "";
