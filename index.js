@@ -2,9 +2,13 @@ const input = document.querySelector(".input");
 const output = document.querySelector(".output");
 const form = document.querySelector(".input-box");
 
-const start = "1";
-const end = "9";
-const regex = /^[1-9]{3}$/;
+const GAME_START = "1";
+const GAME_END = "9";
+const NUMBER_INPUT_REGEX = /^[1-9]{3}$/;
+const NUMBER_LENGTH = 3;
+const NUMBER_MIN = 1;
+const NUMBER_MAX = 9;
+
 
 let correctAnswer = 0;
 
@@ -15,8 +19,8 @@ const print = (str) => {
 const pickRandomNumber = () => {
   let numbers = "";
 
-  while (numbers.length < 3) {
-    const num = Math.floor(Math.random() * 9) + 1;
+  while (numbers.length < NUMBER_LENGTH) {
+    const num = Math.floor(Math.random() * NUMBER_MAX) + NUMBER_MIN;
 
     if (!numbers.includes(num)) numbers += num;
   }
@@ -48,8 +52,8 @@ const compareNumber = () => {
 
   print(`${threeNumbers}<br>`);
 
-  if (regex.test(threeNumbers) && set.size === 3) {
-    for (let i = 0; i < 3; i++) {
+  if (NUMBER_INPUT_REGEX.test(threeNumbers) && set.size === NUMBER_LENGTH) {
+    for (let i = 0; i < NUMBER_LENGTH; i++) {
       if (threeNumbers[i] === correctAnswer[i]) strike += 1;
       else if (correctAnswer.includes(threeNumbers[i])) ball += 1;
     }
@@ -74,11 +78,12 @@ const compareNumber = () => {
 const gameHandler = (event) => {
   event.preventDefault();
 
-  if (input.value === start) {
+  if (input.value === GAME_START) {
     correctAnswer = pickRandomNumber();
     output.innerHTML = "컴퓨터가 숫자를 뽑았습니다.<br>";
+    console.log(correctAnswer)
     print("숫자를 입력해주세요 : ");
-  } else if (input.value === end) {
+  } else if (input.value === GAME_END) {
     output.innerHTML = "";
     correctAnswer = 0;
     print("애플리케이션이 종료되었습니다.");
@@ -86,7 +91,7 @@ const gameHandler = (event) => {
     print("1 혹은 9를 입력해주세요<br>");
   }
 
-  if (correctAnswer && input.value !== start) {
+  if (correctAnswer && input.value !== GAME_START) {
     compareNumber();
   }
 
