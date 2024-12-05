@@ -9,7 +9,7 @@ const NUMBER_LENGTH = 3;
 const NUMBER_MIN = 1;
 const NUMBER_MAX = 9;
 
-let correctAnswer = 0;
+let correctAnswer = "";
 
 const print = (str) => {
   output.insertAdjacentHTML("beforeend", str);
