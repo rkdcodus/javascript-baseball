@@ -37,10 +37,10 @@ const printHint = (ball, strike) => {
   print(str);
 
   if (strike === NUMBER_LENGTH) {
-    print("<br>3개의 숫자를 모두 맞히셨습니다.<br>--------게임 종료---------");
-  } else {
-    print("<br>숫자를 입력해주세요 : ");
+    return print("<br>3개의 숫자를 모두 맞히셨습니다.<br>--------게임 종료---------");
   }
+
+  print("<br>숫자를 입력해주세요 : ");
 };
 
 const compareNumber = () => {
@@ -68,10 +68,10 @@ const compareNumber = () => {
       });
      */
 
-    printHint(ball, strike);
-  } else {
-    print("중복없이 3자릿수를 입력해주세요.<br> 숫자를 입력해주세요 : ");
+    return printHint(ball, strike);
   }
+
+  print("중복없이 3자릿수를 입력해주세요.<br> 숫자를 입력해주세요 : ");
 };
 
 const gameHandler = (event) => {
