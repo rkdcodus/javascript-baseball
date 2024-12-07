@@ -19,15 +19,11 @@ const print = (str) => {
 const inputReset = () => (input.value = "");
 
 const pickRandomNumber = () => {
-  let numbers = "";
 
-  while (numbers.length < NUMBER_LENGTH) {
-    const num = Math.floor(Math.random() * NUMBER_MAX) + NUMBER_MIN;
+  const numbers = Array.from({ length: NUMBER_MAX }, (_, i) => (i + 1));
+  const shuffled = numbers.sort(() => Math.random() - 0.5);
 
-    if (!numbers.includes(num)) numbers += num;
-  }
-
-  return numbers;
+  return shuffled.slice(0, NUMBER_LENGTH).join('');
 };
 
 const printHint = (ball, strike) => {
@@ -83,7 +79,6 @@ const startGame = () => {
   gameStatus = true;
   correctAnswer = pickRandomNumber();
   output.innerHTML = "컴퓨터가 숫자를 뽑았습니다.<br>";
-  console.log(correctAnswer);
   print("숫자를 입력해주세요 : ");
   inputReset();
 };
