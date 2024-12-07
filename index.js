@@ -33,13 +33,15 @@ const printHint = (ball, strike) => {
   if (strike === 0 && ball === 0) str = "낫싱";
 
   print(str);
+};
 
+const printResult = (strike) => {
   if (strike === NUMBER_LENGTH) {
-    gameStatus = false;
-    return print("<br>3개의 숫자를 모두 맞히셨습니다.<br>--------게임 종료---------");
+    print("<br>3개의 숫자를 모두 맞히셨습니다.<br>--------게임 종료---------");
+    return false;
   }
-
   print("<br>숫자를 입력해주세요 : ");
+  return true;
 };
 
 const compareNumber = () => {
@@ -48,7 +50,7 @@ const compareNumber = () => {
 
   print(`${inputNumbers}<br>`);
   inputReset();
-
+  console.log(correctAnswer);
   if (NUMBER_INPUT_REGEX.test(inputNumbers) && set.size === NUMBER_LENGTH) {
     const { balls, strikes } = [...inputNumbers].reduce(
       (result, num, idx) => {
@@ -62,7 +64,9 @@ const compareNumber = () => {
       { balls: 0, strikes: 0 }
     );
 
-    return printHint(balls, strikes);
+    printHint(balls, strikes);
+    gameStatus = printResult(strikes);
+    return;
   }
 
   print("중복없이 3자릿수를 입력해주세요.<br> 숫자를 입력해주세요 : ");
