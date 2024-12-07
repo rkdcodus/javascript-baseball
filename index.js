@@ -19,11 +19,10 @@ const print = (str) => {
 const inputReset = () => (input.value = "");
 
 const pickRandomNumber = () => {
-
-  const numbers = Array.from({ length: NUMBER_MAX }, (_, i) => (i + 1));
+  const numbers = Array.from({ length: NUMBER_MAX }, (_, i) => i + 1);
   const shuffled = numbers.sort(() => Math.random() - 0.5);
 
-  return shuffled.slice(0, NUMBER_LENGTH).join('');
+  return shuffled.slice(0, NUMBER_LENGTH).join("");
 };
 
 const printHint = (ball, strike) => {
@@ -46,30 +45,24 @@ const printHint = (ball, strike) => {
 const compareNumber = () => {
   const inputNumbers = input.value;
   const set = new Set(inputNumbers);
-  let ball = 0;
-  let strike = 0;
 
   print(`${inputNumbers}<br>`);
   inputReset();
 
   if (NUMBER_INPUT_REGEX.test(inputNumbers) && set.size === NUMBER_LENGTH) {
-    for (let i = 0; i < NUMBER_LENGTH; i++) {
-      if (inputNumbers[i] === correctAnswer[i]) strike += 1;
-      else if (correctAnswer.includes(inputNumbers[i])) ball += 1;
-    }
-
-    /**
-      방법1
-      [...threeNumbers].forEach((num, index) => {
-        if (correctAnswer[index] == num) {
-          strike += 1;
+    const { balls, strikes } = [...inputNumbers].reduce(
+      (result, num, idx) => {
+        if (correctAnswer[idx] == num) {
+          return { ...result, strikes: result.strikes + 1 };
         } else if (correctAnswer.includes(num)) {
-          ball += 1;
+          return { ...result, balls: result.balls + 1 };
         }
-      });
-     */
+        return result;
+      },
+      { balls: 0, strikes: 0 }
+    );
 
-    return printHint(ball, strike);
+    return printHint(balls, strikes);
   }
 
   print("중복없이 3자릿수를 입력해주세요.<br> 숫자를 입력해주세요 : ");
