@@ -1,0 +1,7 @@
+const GAME_START = "1";
+const GAME_END = "9";
+const NUMBER_INPUT_REGEX = /^[1-9]{3}$/;
+const NUMBER_LENGTH = 3;
+const NUMBER_MAX = 9;
+
+export { GAME_START, GAME_END, NUMBER_INPUT_REGEX, NUMBER_LENGTH, NUMBER_MAX };
